@@ -40,6 +40,9 @@ Next, we visualized the length of each resume in our dataset to get an idea of t
 
 Since there are some outliers in the data, we decided to use the mean plus three times the standard deviation of the length as the vocabulary size for our vectorization techniques.
 
+## Train Test Split
+The dataset has been divided into three parts - train, test and validation - with a ratio of 70:20:10.
+
 ## Vectorization
 
 We used the TF-IDF (Term Frequency-Inverse Document Frequency) vectorization technique, to convert the textual data into a format suitable for machine learning and deep learning models.
