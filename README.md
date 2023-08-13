@@ -18,7 +18,40 @@ Follow these steps to get the project up and running:
 4. Run the script:
    ```bash
    python script.py your_folder_location
-Replace _**your_folder_location**_ with the path to the folder containing the resumes you want to classify.
+Replace _**your_folder_location**_ with the path to the folder containing the resumes you want to classify. These commands will create folders for the corresponding resume type and will make a copy of the resumes in each folder. Moreover, it will generate a _categorized_resumes.csv_ file that contains the file corresponding to the category. 
+
+# Data Preprocessing
+
+Before building our classifier, we conducted some essential data preprocessing steps to ensure the quality of the input data. Here's an overview of the preprocessing process:
+
+## Data Distribution
+
+We started by analyzing the data distribution to understand the balance between the classes. The image below presents the data distribution:
+
+![Data Distribution](https://github.com/NifulIslam/Resume-Classifier/blob/master/images/occurences.png)
+
+Since the data distribution is mostly balanced, there is no need for further balancing techniques.
+
+## Resume Length Analysis
+
+Next, we visualized the length of each resume in our dataset to get an idea of the distribution. The image below shows the distribution of resume lengths:
+
+![Resume Length Distribution](https://github.com/NifulIslam/Resume-Classifier/blob/master/images/resume_length.png)
+
+Since there are some outliers in the data, we decided to use the mean plus three times the standard deviation of the length as the vocabulary size for our vectorization techniques.
+
+## Vectorization
+
+We used the TF-IDF (Term Frequency-Inverse Document Frequency) vectorization technique, to convert the textual data into a format suitable for machine learning and deep learning models.
+
+## Model Performance on TF-IDF Dataset
+
+We trained various machine learning and deep learning models on the TF-IDF vectorized dataset. The image below shows the accuracy of different models on the TF-IDF dataset:
+
+![Model Accuracy on TF-IDF Dataset](https://github.com/NifulIslam/Resume-Classifier/blob/master/images/ml-accuracy.png)
+
+These preprocessing steps ensure that the input data is well-prepared for training our resume classifier.
+
 
 ## Benchmark Study
 
@@ -44,4 +77,3 @@ The table below presents the results of the benchmark study:
 | Auto Tokenizer                  | Bert(Pretrained)                    | 0.3889        | 0.4034        | 0.3889        | 0.3438        | 0.3645        |
 
 Since Gradient Boosting paired with TFIDF with Stop Words Deletion produced the best performance, we choose it as the final classifier.
-

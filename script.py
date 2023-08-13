@@ -4,6 +4,7 @@ import PyPDF2
 import sys
 import joblib
 import shutil
+import pandas as pd
 
 #for reading full pdf content
 def read_pdf(file_path):
@@ -29,6 +30,7 @@ file_and_text={} #maps file name to file content
 for file in files:
     file_and_text[file]=read_pdf(file)
 
+result={}
 #classify and paste cv to corresponding folder    
 for file_name, file_content in file_and_text.items():
     X_test=vectorizer.transform([file_content]) #vectorizing the text
@@ -38,7 +40,10 @@ for file_name, file_content in file_and_text.items():
     #copy the original file and paste to the corresponding directory
     try:
         shutil.copy(file_name, y_pred)
+        file_name_split=file_name.split('/')[-1]
+        result[file_name_split]=y_pred
     except:
         print("error copying file: "+ file_name)
     
-
+result=pd.DataFrame(result.items(),columns=['filename','category'])
+result.to_csv('categorized_resumes.csv',index=False)
